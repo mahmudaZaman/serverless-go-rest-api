@@ -1,0 +1,20 @@
+{
+  "name": "serverless-go-rest-api",
+  "version": "1.0.0",
+  "description": "A sample repo to write rest API using serverless, AWS, Golang, Gin , Postgres",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:dev": "make build && sls deploy --stage dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdnajimahmed/serverless-go-rest-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdnajimahmed/serverless-go-rest-api/issues"
+  },
+  "homepage": "https://github.com/mdnajimahmed/serverless-go-rest-api#readme"
+}
