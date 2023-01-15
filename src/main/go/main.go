@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/apex/gateway"
 	"github.com/gin-gonic/gin"
+	"github.com/mdnajimahmed/serverless-go-rest-api/src/main/go/handler"
 	"log"
 	"net/http"
 	"os"
@@ -21,11 +22,7 @@ func inLambda() bool {
 func setupRouter() *gin.Engine {
 
 	r := gin.Default()
-
-	r.GET("/hello-world", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "hello test completed successfully"})
-	})
-
+	r.GET("/ping", handler.Ping)
 	return r
 }
 
