@@ -17,7 +17,8 @@ func setupRouter() *gin.Engine {
 
 	r := gin.Default()
 	r.GET("/ping", handler.Ping)
-	r.POST("/todo", handler.Todo)
+	r.POST("/todo", handler.CreateTodo)
+	r.GET("/todo/:id", handler.GetTodoById)
 	return r
 }
 
@@ -39,8 +40,8 @@ func prepareDataBase() {
 		fmt.Println("Creating todo table")
 		// Create table for `User`
 		db.Migrator().CreateTable(&data.Todo{})
-		fmt.Println("Todo table is ready")
+		fmt.Println("CreateTodo table is ready")
 	} else {
-		fmt.Println("Todo table already exists")
+		fmt.Println("CreateTodo table already exists")
 	}
 }

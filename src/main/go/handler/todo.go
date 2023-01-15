@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func Todo(ctx *gin.Context) {
+func CreateTodo(ctx *gin.Context) {
 	var todo data.Todo
 
 	// Call BindJSON to bind the received JSON to
@@ -25,4 +25,13 @@ func Todo(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"id": todo.ID})
 	}
+}
+
+func GetTodoById(ctx *gin.Context) {
+	var todo data.Todo
+	todoId := ctx.Param("id")
+	db, closeConnection := util.GetDbHandle()
+	defer closeConnection()
+	db.First(&todo, todoId)
+	ctx.JSON(http.StatusOK, todo)
 }
