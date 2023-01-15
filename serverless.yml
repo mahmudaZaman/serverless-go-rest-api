@@ -7,6 +7,27 @@ provider:
   runtime: go1.x
   region: ap-southeast-2
   stage: ${opt:stage}
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'xray:PutTraceSegments'
+        - 'xray:PutTelemetryRecords'
+        - 'secretsmanager:GetSecretValue'
+        - 'secretsmanager:DescribeSecret'
+        - 'ssm:GetParameterHistory'
+        - 'ssm:ListTagsForResource'
+        - 'ssm:GetParametersByPath'
+        - 'ssm:GetParameters'
+        - 'ssm:GetParameter'
+      Resource: '*'
+    - Effect: 'Allow'
+      Action:
+        - 'kms:Decrypt'
+        - 'kms:DescribeKey'
+      Resource: '*'
 
 functions:
   api:
