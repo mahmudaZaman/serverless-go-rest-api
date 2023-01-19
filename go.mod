@@ -6,6 +6,7 @@ require (
 	github.com/apex/gateway v1.1.2
 	github.com/aws/aws-sdk-go v1.44.180
 	github.com/gin-gonic/gin v1.8.2
+	github.com/lib/pq v1.10.7
 	gorm.io/driver/postgres v1.4.6
 	gorm.io/gorm v1.24.3
 )

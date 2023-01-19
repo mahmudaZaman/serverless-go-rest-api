@@ -14,11 +14,17 @@ import (
 var port = ":8287"
 
 func setupRouter() *gin.Engine {
-
 	r := gin.Default()
 	r.GET("/ping", handler.Ping)
 	r.POST("/todo", handler.CreateTodo)
 	r.GET("/todo/:id", handler.GetTodoById)
+	r.PATCH("/todo/:id", handler.UpdateTodo)
+	r.PATCH("/todo/batch", handler.UpdateTodoBatch)
+	r.DELETE("/todo/:id", handler.DeleteTodo)
+	r.GET("/todos", handler.GetAllTodos)
+	r.POST("/todo/batch", handler.CreateBatchTodo)
+	r.POST("/mssp/batch", handler.CreateBatchMSSP)
+	r.GET("/orMapping", handler.GetAllOrMapping)
 	return r
 }
 
@@ -36,12 +42,13 @@ func main() {
 func prepareDataBase() {
 	db, closeConnection := util.GetDbHandle()
 	defer closeConnection()
-	if !db.Migrator().HasTable(&data.Todo{}) {
-		fmt.Println("Creating todo table")
+	if !db.Migrator().HasTable(&data.OrMapping{}) {
+		fmt.Println("Creating mssp table")
 		// Create table for `User`
-		db.Migrator().CreateTable(&data.Todo{})
-		fmt.Println("CreateTodo table is ready")
+		//db.Migrator().CreateTable(&data.Todo{})
+		db.Migrator().CreateTable(&data.OrMapping{})
+		fmt.Println("CreateMSSP table is ready")
 	} else {
-		fmt.Println("CreateTodo table already exists")
+		fmt.Println("CreateMSSP table already exists")
 	}
 }
